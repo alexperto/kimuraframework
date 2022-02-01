@@ -30,7 +30,6 @@ module Kimurai::BrowserBuilder
                  remote-debugging-port=9222
                  verbose=true
                  log-path=/tmp/chromedriver2.log
-                 user-data-dir=/tmp/webdriver-chrome-profileeureka/Default/Preference
                  window-size=1280,1024
                  ]
                }
@@ -41,9 +40,7 @@ module Kimurai::BrowserBuilder
         end
 
         # See all options here: https://seleniumhq.github.io/selenium/docs/api/rb/Selenium/WebDriver/Chrome/Options.html
-        profile = Selenium::WebDriver::Chrome::Profile.new('eureka')
-        profile['extensions.password_manager_enabled'] = false
-        
+        profile = Selenium::WebDriver::Chrome::Profile.new
         driver_options = Selenium::WebDriver::Chrome::Options.new(profile: profile, **opts)
 
         # Window size

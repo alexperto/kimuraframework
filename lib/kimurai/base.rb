@@ -131,11 +131,11 @@ module Kimurai
       else
         spider.parse
       end
-    #rescue StandardError, SignalException, SystemExit => e
-    #  @run_info.merge!(status: :failed, error: e.inspect)
-    #  exception_on_fail ? raise(e) : [@run_info, e]
-    #else
-    #  @run_info.merge!(status: :completed)
+    rescue StandardError, SignalException, SystemExit => e
+      @run_info.merge!(status: :failed, error: e.inspect)
+      exception_on_fail ? raise(e) : [@run_info, e]
+    else
+      @run_info.merge!(status: :completed)
     ensure
       if spider
         spider.browser.destroy_driver! if spider.instance_variable_get("@browser")

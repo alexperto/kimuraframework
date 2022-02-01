@@ -31,6 +31,7 @@ module Kimurai::BrowserBuilder
                  ignore_ssl_errors
                  verbose
                  log-path=/tmp/chromedriver.log
+                 user-data-dir=/home/eureka
                  ]
                }
 

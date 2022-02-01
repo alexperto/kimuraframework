@@ -27,7 +27,6 @@ module Kimurai::BrowserBuilder
                  --disable-gpu
                  --no-sandbox
                  --disable-translate
-                 --disable-dev-shm-usage
                  --remote-debugging-port=9222
                  --headless
                  --disable-extensions

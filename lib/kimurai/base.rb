@@ -199,7 +199,11 @@ module Kimurai
       end
 
       visited = delay ? browser.visit(url, delay: delay) : browser.visit(url)
+      ap "visited"
+      ap visited.inspect
       return unless visited
+
+      ap browser.current_response(response_type)
 
       public_send(handler, browser.current_response(response_type), **{ url: url, data: data })
     end

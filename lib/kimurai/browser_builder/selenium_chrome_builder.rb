@@ -28,8 +28,8 @@ module Kimurai::BrowserBuilder
                  no-sandbox
                  disable-translate
                  remote-debugging-port=9222
-                 verbose
-                 log-path=/tmp/chromedriver.log
+                 verbose=true
+                 log-path=/tmp/chromedriver2.log
                  user-data-dir=/home/eureka
                  window-size=1280,1024
                  ]

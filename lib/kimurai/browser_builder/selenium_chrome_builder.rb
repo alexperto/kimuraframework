@@ -23,12 +23,12 @@ module Kimurai::BrowserBuilder
       Capybara.register_driver :selenium_chrome do |app|
         # Create driver options
         opts = { args: %w[
-                 --start-maximized
-                 --disable-gpu
-                 --no-sandbox
-                 --disable-translate
-                 --remote-debugging-port=9222
-                 --disable-extensions
+                 start-maximized
+                 disable-gpu
+                 no-sandbox
+                 disable-translate
+                 remote-debugging-port=9222
+                 disable-extensions
                  ]
                }
 

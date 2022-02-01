@@ -28,10 +28,10 @@ module Kimurai::BrowserBuilder
                  no-sandbox
                  disable-translate
                  remote-debugging-port=9222
-                 ignore_ssl_errors
                  verbose
                  log-path=/tmp/chromedriver.log
                  user-data-dir=/home/eureka
+                 window-size=1280,1024
                  ]
                }
 
@@ -77,8 +77,8 @@ module Kimurai::BrowserBuilder
 
         # SSL
         if @config[:ignore_ssl_errors].present?
-          driver_options.args << "--ignore-certificate-errors"
-          driver_options.args << "--allow-insecure-localhost"
+          driver_options.args << "ignore-certificate-errors"
+          driver_options.args << "allow-insecure-localhost"
           logger.debug "BrowserBuilder (selenium_chrome): enabled ignore_ssl_errors"
         end
 
@@ -115,7 +115,7 @@ module Kimurai::BrowserBuilder
                 "on Linux platform. Browser will run in normal mode. Set `native` mode instead."
             end
           else
-            driver_options.args << "--headless"
+            driver_options.args << "headless"
             logger.debug "BrowserBuilder (selenium_chrome): enabled native headless_mode"
           end
         end

@@ -28,7 +28,6 @@ module Kimurai::BrowserBuilder
                  no-sandbox
                  disable-translate
                  remote-debugging-port=9222
-                 disable-extensions
                  ]
                }
 
@@ -119,6 +118,8 @@ module Kimurai::BrowserBuilder
 
         chromedriver_path = Kimurai.configuration.chromedriver_path || "/usr/local/bin/chromedriver"
         service = Selenium::WebDriver::Service.chrome(path: chromedriver_path)
+        ap "DRIVER OPTIONS"
+        ap driver_options
         Capybara::Selenium::Driver.new(app, browser: :chrome, options: driver_options, service: service)
       end
 

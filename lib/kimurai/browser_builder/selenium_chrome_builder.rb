@@ -204,6 +204,8 @@ module Kimurai::BrowserBuilder
 
       # return Capybara session instance
       @browser
+      ap @browser.inspect
+      @browser
     end
   end
 end

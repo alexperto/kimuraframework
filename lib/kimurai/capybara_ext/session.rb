@@ -9,7 +9,6 @@ module Capybara
 
     alias_method :original_visit, :visit
     def visit(visit_uri, delay: config.before_request[:delay], skip_request_options: false, max_retries: 3)
-      ap "inside visit method"
       if spider
         process_delay(delay) if delay
         retries, sleep_interval = 0, 0
@@ -20,7 +19,7 @@ module Capybara
           spider.class.update(:visits, :requests) if spider.with_info
 
           original_visit(visit_uri)
-        else
+
           driver.responses += 1 and logger.info "Browser: finished get request to: #{visit_uri}"
           spider.class.update(:visits, :responses) if spider.with_info
           driver.visited = true unless driver.visited

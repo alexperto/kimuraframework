@@ -22,7 +22,17 @@ module Kimurai::BrowserBuilder
       # Register driver
       Capybara.register_driver :selenium_chrome do |app|
         # Create driver options
-        opts = { args: %w[--disable-gpu --no-sandbox --disable-translate --disable-dev-shm-usage --remote-debugging-port=9222 --headless] }
+        opts = { args: %w[
+                 --start-maximized
+                 --disable-gpu
+                 --no-sandbox
+                 --disable-translate
+                 --disable-dev-shm-usage
+                 --remote-debugging-port=9222
+                 --headless
+                 --disable-extensions
+                 ]
+               }
 
         # Provide custom chrome browser path:
         if chrome_path = Kimurai.configuration.selenium_chrome_path

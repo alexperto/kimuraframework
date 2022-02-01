@@ -41,7 +41,10 @@ module Kimurai::BrowserBuilder
         end
 
         # See all options here: https://seleniumhq.github.io/selenium/docs/api/rb/Selenium/WebDriver/Chrome/Options.html
-        driver_options = Selenium::WebDriver::Chrome::Options.new(**opts)
+        profile = Selenium::WebDriver::Chrome::Profile.new
+        profile['extensions.password_manager_enabled'] = false
+        
+        driver_options = Selenium::WebDriver::Chrome::Options.new(profile: profile, **opts)
 
         # Window size
         if size = @config[:window_size].presence

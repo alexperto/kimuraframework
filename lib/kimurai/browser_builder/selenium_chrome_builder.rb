@@ -28,6 +28,9 @@ module Kimurai::BrowserBuilder
                  no-sandbox
                  disable-translate
                  remote-debugging-port=9222
+                 ignore_ssl_errors
+                 verbose
+                 log-path=/tmp/chromedriver.log
                  ]
                }
 

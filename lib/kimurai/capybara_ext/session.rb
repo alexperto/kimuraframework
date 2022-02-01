@@ -36,6 +36,7 @@ module Capybara
               raise e unless skip_error_on_failure?(e)
             end
           else
+            ap "CRASHES HERE"
             raise e
           end
         else

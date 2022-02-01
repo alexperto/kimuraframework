@@ -28,7 +28,6 @@ module Kimurai::BrowserBuilder
                  --no-sandbox
                  --disable-translate
                  --remote-debugging-port=9222
-                 --headless
                  --disable-extensions
                  ]
                }

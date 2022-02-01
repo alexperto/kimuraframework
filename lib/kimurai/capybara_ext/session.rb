@@ -9,6 +9,7 @@ module Capybara
 
     alias_method :original_visit, :visit
     def visit(visit_uri, delay: config.before_request[:delay], skip_request_options: false, max_retries: 3)
+      ap "inside visit method"
       if spider
         process_delay(delay) if delay
         retries, sleep_interval = 0, 0

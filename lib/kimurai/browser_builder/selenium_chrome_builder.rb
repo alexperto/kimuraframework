@@ -20,7 +20,7 @@ module Kimurai::BrowserBuilder
 
     def build
       # Register driver
-      Capybara.register_driver :selenium_chrome do |app|
+      Capybara.register_driver :selenium_chrome_headless do |app|
         # Create driver options
         opts = { args: %w[
                  start-maximized
@@ -124,7 +124,7 @@ module Kimurai::BrowserBuilder
       end
 
       # Create browser instance (Capybara session)
-      @browser = Capybara::Session.new(:selenium_chrome)
+      @browser = Capybara::Session.new(:selenium_chrome_headless)
       @browser.spider = spider
       logger.debug "BrowserBuilder (selenium_chrome): created browser instance"
 

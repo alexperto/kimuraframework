@@ -37,8 +37,7 @@ module Kimurai::BrowserBuilder
         end
 
         # See all options here: https://seleniumhq.github.io/selenium/docs/api/rb/Selenium/WebDriver/Chrome/Options.html
-        profile = Selenium::WebDriver::Chrome::Profile.new
-        driver_options = Selenium::WebDriver::Chrome::Options.new(profile: profile, **opts)
+        driver_options = Selenium::WebDriver::Chrome::Options.new(**opts)
 
         # Window size
         if size = @config[:window_size].presence
@@ -203,7 +202,7 @@ module Kimurai::BrowserBuilder
       end
 
       # return Capybara session instance
-      @browser
+      ap "Capybara Session Instance:"
       ap @browser.inspect
       @browser
     end

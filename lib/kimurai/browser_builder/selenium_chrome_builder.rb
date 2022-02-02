@@ -26,11 +26,8 @@ module Kimurai::BrowserBuilder
                  start-maximized
                  disable-gpu
                  no-sandbox
+                 headless
                  disable-translate
-                 remote-debugging-port=9222
-                 verbose=true
-                 log-path=/tmp/chromedriver2.log
-                 window-size=1280,1024
                  ]
                }
 

@@ -28,6 +28,7 @@ module Kimurai::BrowserBuilder
                  no-sandbox
                  headless
                  disable-translate
+                 disable-dev-shm-usage
                  ]
                }
 

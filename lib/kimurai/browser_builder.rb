@@ -14,6 +14,8 @@ module Kimurai
 
       builder_class_name = "#{engine}_builder".classify
       builder = "Kimurai::BrowserBuilder::#{builder_class_name}".constantize
+      ap "Building Browser"
+      ap config
       builder.new(config, spider: spider).build
     end
   end

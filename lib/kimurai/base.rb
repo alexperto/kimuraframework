@@ -125,7 +125,7 @@ module Kimurai
           if start_url.class == Hash
             spider.request_to(:parse, start_url)
           else
-            spider.request_to(:parse, url: start_url)
+            spider.request_to(:parse, **{url: start_url})
           end
         end
       else
@@ -198,10 +198,15 @@ module Kimurai
         logger.warn "Spider: request_to: not unique url: #{url}, skipped" and return
       end
 
+      ap "VISIT!"
       visited = delay ? browser.visit(url, delay: delay) : browser.visit(url)
+      ap "visited"
+      ap visited.inspect
       return unless visited
 
-      public_send(handler, browser.current_response(response_type), { url: url, data: data })
+      ap browser.current_response(response_type)
+
+      public_send(handler, browser.current_response(response_type), **{ url: url, data: data })
     end
 
     def console(response = nil, url: nil, data: {})

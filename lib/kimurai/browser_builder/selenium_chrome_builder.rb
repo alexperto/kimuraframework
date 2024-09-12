@@ -20,9 +20,17 @@ module Kimurai::BrowserBuilder
 
     def build
       # Register driver
-      Capybara.register_driver :selenium_chrome do |app|
+      Capybara.register_driver :selenium_chrome_headless do |app|
         # Create driver options
-        opts = { args: %w[--disable-gpu --no-sandbox --disable-translate] }
+        opts = { args: %w[
+                 start-maximized
+                 disable-gpu
+                 no-sandbox
+                 headless
+                 disable-translate
+                 disable-dev-shm-usage
+                 ]
+               }
 
         # Provide custom chrome browser path:
         if chrome_path = Kimurai.configuration.selenium_chrome_path
@@ -30,7 +38,7 @@ module Kimurai::BrowserBuilder
         end
 
         # See all options here: https://seleniumhq.github.io/selenium/docs/api/rb/Selenium/WebDriver/Chrome/Options.html
-        driver_options = Selenium::WebDriver::Chrome::Options.new(opts)
+        driver_options = Selenium::WebDriver::Chrome::Options.new(**opts)
 
         # Window size
         if size = @config[:window_size].presence
@@ -66,8 +74,8 @@ module Kimurai::BrowserBuilder
 
         # SSL
         if @config[:ignore_ssl_errors].present?
-          driver_options.args << "--ignore-certificate-errors"
-          driver_options.args << "--allow-insecure-localhost"
+          driver_options.args << "ignore-certificate-errors"
+          driver_options.args << "allow-insecure-localhost"
           logger.debug "BrowserBuilder (selenium_chrome): enabled ignore_ssl_errors"
         end
 
@@ -104,18 +112,20 @@ module Kimurai::BrowserBuilder
                 "on Linux platform. Browser will run in normal mode. Set `native` mode instead."
             end
           else
-            driver_options.args << "--headless"
+            driver_options.args << "headless"
             logger.debug "BrowserBuilder (selenium_chrome): enabled native headless_mode"
           end
         end
 
         chromedriver_path = Kimurai.configuration.chromedriver_path || "/usr/local/bin/chromedriver"
         service = Selenium::WebDriver::Service.chrome(path: chromedriver_path)
+        ap "DRIVER OPTIONS"
+        ap driver_options
         Capybara::Selenium::Driver.new(app, browser: :chrome, options: driver_options, service: service)
       end
 
       # Create browser instance (Capybara session)
-      @browser = Capybara::Session.new(:selenium_chrome)
+      @browser = Capybara::Session.new(:selenium_chrome_headless)
       @browser.spider = spider
       logger.debug "BrowserBuilder (selenium_chrome): created browser instance"
 
@@ -193,6 +203,8 @@ module Kimurai::BrowserBuilder
       end
 
       # return Capybara session instance
+      ap "Capybara Session Instance:"
+      ap @browser.inspect
       @browser
     end
   end
